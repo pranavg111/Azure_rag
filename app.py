@@ -13,7 +13,7 @@ from langchain.chains import RetrievalQA
 loader = PyPDFLoader("Pranav_Resume.pdf")
 pages = loader.load()
 
-openai_api_key = "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"
+openai_api_key = "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"
 
 splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 docs = splitter.split_documents(pages)
@@ -52,5 +52,6 @@ def ask_question():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
+
 
 
