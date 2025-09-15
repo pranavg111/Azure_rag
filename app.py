@@ -13,12 +13,14 @@ from langchain.chains import RetrievalQA
 loader = PyPDFLoader("Pranav_Resume.pdf")
 pages = loader.load()
 
+openai_api_key = "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"
+
 splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 docs = splitter.split_documents(pages)
 
 embedding_model = OpenAIEmbeddings(
     model="text-embedding-ada-002",
-    openai_api_key=os.getenv("OPENAI_API_KEY")
+    openai_api_key=openai_api_key
 )
 vectorstore = FAISS.from_documents(docs, embedding_model)
 retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
@@ -26,7 +28,7 @@ retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 llm = ChatOpenAI(
     model="gpt-4o-mini",
     temperature=0,
-    openai_api_key=os.getenv("OPENAI_API_KEY")
+    openai_api_key=openai_api_key
 )
 
 qa_chain = RetrievalQA.from_chain_type(
@@ -50,4 +52,5 @@ def ask_question():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
+
 
