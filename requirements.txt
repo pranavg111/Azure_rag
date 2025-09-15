@@ -8,3 +8,4 @@ langchain_openai
 faiss-cpu==
 openai==1.107.0
 streamlit==1.37.1
+
